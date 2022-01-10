@@ -1,0 +1,22 @@
+{
+  "name": "card",
+  "version": "1.0.0",
+  "description": "**Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Sanja322",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.2",
+    "socket.io": "^4.4.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://Sanja322@bitbucket.org/sanja322/card.git"
+  },
+  "keywords": [],
+  "homepage": "https://bitbucket.org/sanja322/card#readme"
+}

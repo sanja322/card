@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Multiplayer Experiment</title>
+
+        <script src="/socket.io/socket.io.js"></script>
+
+        <style>
+            canvas{
+                background-color: skyblue;
+            }
+        </style>
+    </head>
+    <body>
+    <audio id="turn_audio" src="js/turn.mp3" preload="auto"></audio>
+    <audio id="error_audio" src="js/error.mp3" preload="auto"></audio>
+
+        <div>
+            <div id="table">
+                <table>
+                    <tr>
+                        <td>Игрок №1</td>
+                        <td>Игрок №2</td>
+                        <td>Игрок №3</td>
+                        <td>Игрок №4</td>
+                    </tr>
+                    <tr>
+                        <td>Команда №1</td>
+                        <td>Команда №2</td>
+                        <td>Команда №1</td>
+                        <td>Команда №2</td>
+                    </tr>
+                    <tr>
+                        <td>Введите Ваше имя:</td>
+                        <td>Введите Ваше имя:</td>
+                        <td>Введите Ваше имя:</td>
+                        <td>Введите Ваше имя:</td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" id="input0" value="Игрок №1"></td>
+                        <td><input type="text" id="input1" value="Игрок №2"></td>
+                        <td><input type="text" id="input2" value="Игрок №3"></td>
+                        <td><input type="text" id="input3" value="Игрок №4"></td>
+                    </tr>
+                    <tr>
+                        <td><button id="button0">Принять</button></td>
+                        <td><button id="button1">Принять</button></td>
+                        <td><button id="button2">Принять</button></td>
+                        <td><button id="button3">Принять</button></td>
+                    </tr>
+
+                </table>
+            </div>
+
+            <canvas id="canvas" class="canvas">
+            </canvas>
+        </div>
+        <script src="js/card_client.js"></script>
+    </body>
