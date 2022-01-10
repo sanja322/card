@@ -100,6 +100,8 @@ let ctx = canvas.getContext("2d"); //Получение контекста — �
 let table = document.getElementById("table");
 let turn_audio = document.getElementById('turn_audio');
 let error_audio = document.getElementById('error_audio');
+let disconnect_audio = document.getElementById('disconnect');
+let connect_audio = document.getElementById('connect');
 
 let scale; //Масштаб обьектов
 
@@ -176,6 +178,14 @@ socket.on('getTrump', function (suits, cardsForTrump ) {
 
 socket.on('audioError', function () {
     error_audio.play();
+});
+
+socket.on('user_disconnect', function () {
+    disconnect_audio.play();
+});
+
+socket.on('user_connect', function () {
+    connect_audio.play();
 });
 
 socket.on('discard_pile_flag_true', function () {

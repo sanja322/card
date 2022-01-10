@@ -62,19 +62,27 @@ io.on('connection', function(socket){
             if (!trump) {
                 //получаем козер
                 io.to(playersSocketId[whose_move]).emit('getTrump', suits, cards_names[whose_move].slice(0,3));
-                io.to(playersSocketId[whose_move]).emit('getTrump', suits, cards_names[whose_move].slice(0,3));
+                //io.to(playersSocketId[whose_move]).emit('getTrump', suits, cards_names[whose_move].slice(0,3));
+                text_game = 'Игрок ' + players_name[whose_move] + 'выберает козер.';
+                io.emit('get_text', text_game);
+                io.to(playersSocketId[whose_move]).emit('get_text', 'ВЫБЕРИТЕ КОЗЕР ->');
 
             }
             //если происходит переподключение
             else {
                 //finalize
-                for (let i = 0; i < 4; i++) {
+                /*for (let i = 0; i < 4; i++) {
                     console.log(playersSocketId + ' переподключение 3');
                     playerName = (i + 1) + ' ' + players_name[i];
                     io.to(playersSocketId[i]).emit("giveGameState", cards_names[i], playerName, hand_move, trump, discardPile);
-                    text_game = 'Ходит игрок ' + players_name[whose_move];
+                    text_game = 'Ходит игрок ' + players_name[card_number_in_hod];
                     io.emit('get_text', text_game);
-                }
+                    io.emit('user_connect');
+                }*/
+                io.to(playersSocketId[index]).emit("giveGameState", cards_names[index], playerName, hand_move, trump, discardPile);
+                text_game = 'Ходит игрок ' + players_name[card_number_in_hod];
+                io.emit('get_text', text_game);
+                io.emit('user_connect');
             }
 
         }
@@ -125,7 +133,7 @@ io.on('connection', function(socket){
                 text_game = 'Игрок ' + players_name[whose_move] + 'выберает козер.';
                 io.emit('get_text', text_game);
 
-                io.to(playersSocketId[whose_move]).emit('get_text', 'ВЫБЕРИТЕ КОЗЕР');
+                io.to(playersSocketId[whose_move]).emit('get_text', 'ВЫБЕРИТЕ КОЗЕР ->');
                 console.log(cards_names[whose_move].slice(0,3));
                 io.to(playersSocketId[whose_move]).emit('getTrump', suits, cards_names[whose_move].slice(0,3));
 
@@ -203,6 +211,7 @@ io.on('connection', function(socket){
                         io.emit('get_text', text_game);
                         //io.emit('discard_pile_flag_true');
                         trump = '';
+                        discardPile = [0,0];
                         //cards_names = [];
                         //hand_move = [];
 
@@ -235,6 +244,7 @@ io.on('connection', function(socket){
             playersSocketId[i] = 0;
             numberActiveUser --;
             console.log('disconekt');
+            io.emit('user_disconnect');
             //io.emit('update-players',players);
         }
 
