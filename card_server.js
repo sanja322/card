@@ -114,7 +114,7 @@ function getIndexMaxCard(cardsOfTurn,trump) {
     //получение индекса максимальной карты (карты хода, козер)
     let indexMaxValue;
     let listPowerOfCards = getPowersOfList(cardsOfTurn, trump)
-    console.log('Сила карт' + listPowerOfCards);
+    //console.log('Сила карт' + listPowerOfCards);
     indexMaxValue = max(listPowerOfCards);
     return indexMaxValue;
 }
@@ -255,9 +255,9 @@ function sortMaxMinCard(sortList, trump) {
         let indexMax = max(sortListPower);
         result.push(sortList[indexMax]);
         sortListPower[indexMax] = -1;
-        console.log(sortListPower);
+        //console.log(sortListPower);
     }
-    console.log(result);
+    //console.log(result);
     return result;
 }
 

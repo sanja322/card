@@ -97,7 +97,7 @@ io.on('connection', function(socket){
         cards_names = serverPartOfGame.sortCardsOfPlayers(temp, trump);
         console.log(cards_names);
         for (let i = 0; i < 4; i++) {
-            console.log(playersSocketId + ' 4');
+            console.log('players SocketID '+ playersSocketId + ' 4');
             playerName = (i + 1) + ' ' + players_name[i];
             io.to(playersSocketId[i]).emit("giveGameState", cards_names[i], playerName, hand_move, trump, discardPile);
             text_game = 'Ходит игрок ' + players_name[whose_move];
@@ -153,19 +153,22 @@ io.on('connection', function(socket){
 
     socket.on('card-click', function (nameOfCard){
         //console.log(socket.id);
-        console.log('card_number_in_hod ' + card_number_in_hod);
+        console.log('player_number_in_hod ' + card_number_in_hod + ' ' + players_name[card_number_in_hod]);
         //console.log(players_socket_id[card_number_in_hod]);
         if (socket.id != playersSocketId[card_number_in_hod]) {
+            console.log('Not your move')
             text_game = "Не Ваш ход. Ходит " + players_name[card_number_in_hod];
             io.to(socket.id).emit('get_text', text_game);
             io.to(socket.id).emit('audioError');
         }
         else {
             let hand_possible_moves = serverPartOfGame.possible_moves(hand_move,cards_names[card_number_in_hod],trump);
-            console.log(nameOfCard);
-            console.log('Возможные хода ' + hand_possible_moves);
+
+            console.log('possible moves ' + hand_possible_moves);
+            console.log('Card click ' + nameOfCard + '\n');
             //если карта есть в списке возможных ходов
             if (hand_possible_moves.includes(nameOfCard)) {
+
 
                 io.emit('addCardOfTurn',nameOfCard,hand_move.length);
                 hand_move.push(nameOfCard);
@@ -183,10 +186,13 @@ io.on('connection', function(socket){
                 }
                 //если все походили
                 else {
-                    console.log('Карты хода ' + hand_move);
+                    console.log('\nCards on desk ' + hand_move);
 
                     max_index = serverPartOfGame.max_card(hand_move, trump);
-                    console.log('Индекс максимальной карты ' + max_index);
+                    console.log('Index max card ' + max_index);
+                    console.log('turn' + turn_index);
+                    console.log('Win player ' + turn_index[max_index]);
+                    console.log('Player name ' + players_name[turn_index[max_index]]);
                     text_game = 'Забирает игрок ' + players_name[turn_index[max_index]] + '. Нажмите чтобы продолжыть';
                     io.emit('get_text', text_game);
                     io.emit('discard_pile_flag_true');
@@ -219,7 +225,7 @@ io.on('connection', function(socket){
                     }
 
 
-                    console.log(teamScore);
+                    console.log(teamScore + '\n');
                     //начинаем новый ход
 
 
@@ -230,6 +236,7 @@ io.on('connection', function(socket){
                 card_number_in_hod++;
             }
             else {
+                console.log('wrong card!!!' + '\n');
                 text_game = "Картой " + nameOfCard + " ходить нельзя!!!" + 'Можна ' +  hand_possible_moves;
                 io.to(socket.id).emit('get_text', text_game);
                 io.to(socket.id).emit('audioError');
