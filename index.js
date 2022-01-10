@@ -25,6 +25,7 @@ let trump;
 let suits = ['b','c','p','x'];
 let playerName;
 let discardPile = [0,0];
+let timer = new Date();
 
 // Serve the index page
 app.get("/", function (request, response) {
@@ -102,7 +103,7 @@ io.on('connection', function(socket){
         if (!discard_pile_players_click_ok.includes(socket.id)) {
             discard_pile_players_click_ok.push(socket.id);
         }
-        if (discard_pile_players_click_ok.length == 4) {
+        if (discard_pile_players_click_ok.length == 4 || (new Date - timer) > 8000) {
 
             discard_pile_players_click_ok = [];
             io.emit('discard_pile_flag_false');
@@ -180,14 +181,18 @@ io.on('connection', function(socket){
                     text_game = 'Забирает игрок ' + players_name[turn_index[max_index]] + '. Нажмите чтобы продолжыть';
                     io.emit('get_text', text_game);
                     io.emit('discard_pile_flag_true');
+                    timer = new Date;
+
                     //считаем очки
                     let score = serverPartOfGame.getScoreOfCards(hand_move);
                     if (turn_index[max_index] == 0 ||turn_index[max_index] == 2) {
                         teamDiscardPile = [4,0];
+                        discardPile[0] += 4;
                         teamScore[0] += score;
                     }
                     else {
                         teamDiscardPile = [0,4];
+                        discardPile[1] += 4;
                         teamScore[1] += score;
                     }
                     //конец партиии

@@ -199,6 +199,9 @@ socket.on('giveGameState',function (list, textPlayerName, cardsOfTurn, giveTrump
     Resize();
     listToClick = cards;
     discardPile1.addImage(discardPile[0]);
+    //alert(discardPile[0]);
+    //alert(discardPile[1]);
+
     discardPile2.addImage(discardPile[1]);
 });
 
