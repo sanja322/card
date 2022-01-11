@@ -35,6 +35,7 @@ app.get("/", function (request, response) {
 // Serve the assets directory
 app.use('/images',express.static('images'));
 app.use('/js',express.static('js'));
+app.use('/src',express.static('src'));
 
 // Listen on port 80
 app.set('port', (process.env.PORT || 80));
@@ -54,6 +55,8 @@ io.on('connection', function(socket){
         players_name[index] = playerName;
         io.emit('givePlayerNameAll', playerName, index);
         io.to(socket.id).emit('blockAllButton', playerName, index);
+        let text_totalGameScore = 'Счет ' + totalGameScore[0] + ':' + totalGameScore[1];
+        io.to(socket.id).emit('get_text_totalGameScore', text_totalGameScore);
         playersSocketId[index] = socket.id;
         //console.log(playersSocketId + '2');
 
@@ -131,6 +134,10 @@ io.on('connection', function(socket){
                 console.log('whose_move=' + whose_move);
                 console.log(whose_move);
                 io.emit('newGame');
+
+                let text_totalGameScore = 'Счет ' + totalGameScore[0] + ':' + totalGameScore[1];
+                io.to(socket.id).emit('get_text_totalGameScore', text_totalGameScore);
+
                 text_game = 'Игрок ' + players_name[whose_move] + 'выберает козер.';
                 io.emit('get_text', text_game);
 
@@ -261,4 +268,3 @@ io.on('connection', function(socket){
     //number_player++;
 
 });
-let a = 0;

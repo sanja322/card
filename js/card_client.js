@@ -107,8 +107,9 @@ let scale; //Масштаб обьектов
 
 let discard_pile_flag = false;
 
-let text_player;
-let text_game;
+let text_player = 'Выберите себе игрока и введите свое имя';
+let text_game = '';
+let text_totalGameScore = 'Счет 0:0';
 
 let discardPile1 = new DiscardPile(5, 65);
 let discardPile2 = new DiscardPile(80, 65);
@@ -236,6 +237,10 @@ socket.on('get_text', function (text) {
     text_game = text;
 });
 
+socket.on('get_text_totalGameScore', function (text){
+    text_totalGameScore = text;
+});
+
 socket.on('givePlayerNameAll', function (playerName, index) {
     inputs[index].value = playerName;
     //text_player = 'Игрок: ' + playerName;
@@ -251,7 +256,8 @@ socket.on('blockAllButton', function (textPlayerName, index) {
 
     for (let button of buttons) {
         button.disabled = true;
-        text_player = 'Игрок № '+ (index + 1) + ': ' + textPlayerName;
+        text_player = 'Игрок № ' + (index + 1) + ': ' + textPlayerName;
+
     }
 });
 
@@ -405,6 +411,7 @@ function output_text() {
     ctx.textAlign = "center";
     ctx.fillText(text_player, canvas.width/2, canvas.height*0.05  );
     ctx.fillText(text_game, canvas.width/2, canvas.height*0.05 + size * scale);
+    ctx.fillText(text_totalGameScore, canvas.width*0.05, canvas.height*0.05)
 }
 
 function addCardsToTurn(cardsOfTurn) {
