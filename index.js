@@ -136,7 +136,7 @@ io.on('connection', function(socket){
                 io.emit('newGame');
 
                 let text_totalGameScore = 'Счет ' + totalGameScore[0] + ':' + totalGameScore[1];
-                io.to(socket.id).emit('get_text_totalGameScore', text_totalGameScore);
+                io.emit('get_text_totalGameScore', text_totalGameScore);
 
                 text_game = 'Игрок ' + players_name[whose_move] + 'выберает козер.';
                 io.emit('get_text', text_game);
