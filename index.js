@@ -57,7 +57,8 @@ io.on('connection', function(socket){
         playersSocketId[index] = socket.id;
         //console.log(playersSocketId + '2');
 
-        if (numberActiveUser == 4) {
+        //if (numberActiveUser == 4) {
+        if (true) {
             //console.log('hello');
             if (!trump) {
                 //получаем козер
