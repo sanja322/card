@@ -116,6 +116,7 @@ let discardPile2 = new DiscardPile(80, 65);
 
 let nameOfCards = [];
 let cards = [];
+let imageFon;
 let trump = '';
 let moves = [];
 let card_delete;
@@ -274,6 +275,8 @@ function Resize() {
     scale = (2*canvas.width/20)/187;
     canvas.height = window.innerHeight;
 
+    imageFon = new CreateImage('deck',0,0,100,1024,960);
+
     for(let i = 0; i < cards.length; i++) {
         cards[i].calculateCoordinates();
         //cards[i].Math_cord();
@@ -316,6 +319,8 @@ function Draw_image(picture) {
 function Draw() {
     //Очистка холста от предыдущего кадра
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    Draw_image(imageFon);
 
     for(let i = 0; i < cards.length; i++) {
         Draw_image(cards[i]);
