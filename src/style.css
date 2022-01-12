@@ -1,0 +1,72 @@
+body, html
+{
+	width: 100%;
+	height: 100%;
+	padding: 0px;
+	margin: 0px;
+	overflow: hidden;
+}
+
+.canvas
+{
+	width: 100%;
+	height: 100%;
+}
+
+#headText
+{
+	width: 100%;
+	position: absolute;
+	color: white;
+	font-size: 2.5vw;
+}
+
+a
+{
+	color: white;
+}
+
+#rules,
+#textTotalGameScore,
+#textUserName,
+#textGame
+{
+	display: inline-block;
+	text-align: center;
+}
+
+#rules
+{
+	width: 20%;
+}
+
+#textTotalGameScore
+{
+	width: 10%;
+	font-weight:bold;
+}
+
+#textUserName
+{
+	width: 40%;
+	font-weight:bold;
+}
+
+#textGame
+{
+	width: 100%;
+	font-size: 3vw;
+}
+
+#table
+{
+	position: absolute;
+	top: 15%;
+	left: 2%;
+}
+
+td
+{
+	color: white;
+	font-size: 3vh;
+}

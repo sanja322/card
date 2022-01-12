@@ -103,13 +103,14 @@ let error_audio = document.getElementById('error_audio');
 let disconnect_audio = document.getElementById('disconnect');
 let connect_audio = document.getElementById('connect');
 
+let text_user = document.getElementById('textTotalGameScore');
+let textUserName = document.getElementById('textUserName');
+let textGame = document.getElementById('textGame');
+
 let scale; //Масштаб обьектов
 
 let discard_pile_flag = false;
-
-let text_player = 'Выберите себе игрока и введите свое имя';
-let text_game = '';
-let text_totalGameScore = 'Счет 0:0';
+let discard_pile_flag = false;
 
 let discardPile1 = new DiscardPile(5, 65);
 let discardPile2 = new DiscardPile(80, 65);
@@ -229,17 +230,16 @@ socket.on('deleteCardFromPlayerHand', function () {
 
 socket.on('addCardOfTurn',function (cardName, cardNumberOfTurn) {
     turn_audio.play();
-    output_text();
     create_one_cards(cardName, cardNumberOfTurn);
     Draw();
 });
 
 socket.on('get_text', function (text) {
-    text_game = text;
+    textGame.innerHTML = text;
 });
 
 socket.on('get_text_totalGameScore', function (text){
-    text_totalGameScore = text;
+    text_user.innerHTML = text;
 });
 
 socket.on('givePlayerNameAll', function (playerName, index) {
@@ -257,8 +257,7 @@ socket.on('blockAllButton', function (textPlayerName, index) {
 
     for (let button of buttons) {
         button.disabled = true;
-        text_player = 'Игрок № ' + (index + 1) + ': ' + textPlayerName;
-
+        textUserName.innerHTML = 'Игрок № ' + (index + 1) + ': ' + textPlayerName;
     }
 });
 
@@ -345,8 +344,6 @@ function Draw() {
     for(let i = 0; i < discardPile2.listImages.length; i++) {
         Draw_image(discardPile2.listImages[i]);
     }
-
-    output_text();
 }
 
 function clickImage(event) {
@@ -391,7 +388,7 @@ function getIndexClickedImage(listImages,event) {
 function create_cards(name_cards,cards) {
     let xStartPercent = 5;
     for (let i = 0; i < name_cards.length; i++) {
-        let card = new CreateImage( name_cards[i], xStartPercent, 10, 15, 187, 261);
+        let card = new CreateImage( name_cards[i], xStartPercent, 12, 15, 187, 261);
         //let card = new Card( name_cards[i], i, 1);
         cards.push(card);
         xStartPercent += 9;
@@ -404,19 +401,6 @@ function create_one_cards(cardName,cardNumberOfTurn) {
     let card = new CreateImage(cardName, 20 + cardNumberOfTurn * 15, 40, 15, 187, 261);
     //let card = new Card(cardName, 2 + cardNumberOfTurn, 3);
     moves.push(card);
-}
-
-function output_text() {
-    let factor = 1;
-    if (canvas.height > canvas.width) {
-        factor = canvas.height/canvas.width*2;
-    }
-    let size = 48 * factor;
-    ctx.font = size * scale + 'px serif';
-    ctx.textAlign = "center";
-    ctx.fillText(text_player, canvas.width/2, canvas.height*0.05  );
-    ctx.fillText(text_game, canvas.width/2, canvas.height*0.05 + size * scale);
-    ctx.fillText(text_totalGameScore, canvas.width*0.05, canvas.height*0.05)
 }
 
 function addCardsToTurn(cardsOfTurn) {
