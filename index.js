@@ -38,7 +38,7 @@ app.use('/js',express.static('js'));
 app.use('/src',express.static('src'));
 
 // Listen on port 80
-app.set('port', (process.env.PORT || 5000));
+app.set('port', (process.env.PORT || 80));
 
 http.listen(app.get('port'), function(){
     console.log('listening on port',app.get('port'));
