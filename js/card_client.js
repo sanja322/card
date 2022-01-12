@@ -110,7 +110,6 @@ let textGame = document.getElementById('textGame');
 let scale; //Масштаб обьектов
 
 let discard_pile_flag = false;
-let discard_pile_flag = false;
 
 let discardPile1 = new DiscardPile(5, 65);
 let discardPile2 = new DiscardPile(80, 65);
