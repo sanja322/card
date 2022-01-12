@@ -1,62 +1,73 @@
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>Multiplayer Experiment</title>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Multiplayer Experiment</title>
 
-        <script src="/socket.io/socket.io.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" href="src/style.css" type="text/css">
 
-        <style>
-            canvas{
-                background-color: skyblue;
-            }
-        </style>
-    </head>
-    <body>
     <audio id="turn_audio" src="js/turn.mp3" preload="auto"></audio>
     <audio id="error_audio" src="js/error.mp3" preload="auto"></audio>
     <audio id="connect" src="js/connect.mp3" preload="auto"></audio>
     <audio id="disconnect" src="js/disconnect.mp3" preload="auto"></audio>
 
-        <div>
-            <div id="table">
-                <a href="src/rulesOfTheGame.html" target="_blank">Правила игры</a>
-                <table>
-                    <tr>
-                        <td>Игрок №1</td>
-                        <td>Игрок №2</td>
-                        <td>Игрок №3</td>
-                        <td>Игрок №4</td>
-                    </tr>
-                    <tr>
-                        <td>Команда №1</td>
-                        <td>Команда №2</td>
-                        <td>Команда №1</td>
-                        <td>Команда №2</td>
-                    </tr>
-                    <tr>
-                        <td>Введите Ваше имя:</td>
-                        <td>Введите Ваше имя:</td>
-                        <td>Введите Ваше имя:</td>
-                        <td>Введите Ваше имя:</td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" id="input0" value="Игрок №1"></td>
-                        <td><input type="text" id="input1" value="Игрок №2"></td>
-                        <td><input type="text" id="input2" value="Игрок №3"></td>
-                        <td><input type="text" id="input3" value="Игрок №4"></td>
-                    </tr>
-                    <tr>
-                        <td><button id="button0">Принять</button></td>
-                        <td><button id="button1">Принять</button></td>
-                        <td><button id="button2">Принять</button></td>
-                        <td><button id="button3">Принять</button></td>
-                    </tr>
 
-                </table>
-            </div>
+</head>
 
-            <canvas id="canvas" class="canvas">
-            </canvas>
-        </div>
-        <script src="js/card_client.js"></script>
-    </body>
+<body>
+<div id="headText">
+    <div id="rules"><a href="src/rulesOfTheGame.html" target="_blank">Правила игры</a></div>
+    <div id="textTotalGameScore">Счет 0:0</div>
+    <div id="textUserName">Выберите себе игрока и введите свое имя</div>
+    <div id="textGame"></div>
+</div>
+<div>
+    <div id="table">
+        <table>
+            <tr>
+                <td>Игрок №1</td>
+                <td>Игрок №2</td>
+                <td>Игрок №3</td>
+                <td>Игрок №4</td>
+            </tr>
+            <tr>
+                <td>Команда №1</td>
+                <td>Команда №2</td>
+                <td>Команда №1</td>
+                <td>Команда №2</td>
+            </tr>
+            <tr>
+                <td>Введите Ваше имя:</td>
+                <td>Введите Ваше имя:</td>
+                <td>Введите Ваше имя:</td>
+                <td>Введите Ваше имя:</td>
+            </tr>
+            <tr>
+                <td><input type="text" id="input0" value="Игрок №1"></td>
+                <td><input type="text" id="input1" value="Игрок №2"></td>
+                <td><input type="text" id="input2" value="Игрок №3"></td>
+                <td><input type="text" id="input3" value="Игрок №4"></td>
+            </tr>
+            <tr>
+                <td>
+                    <button id="button0">Принять</button>
+                </td>
+                <td>
+                    <button id="button1">Принять</button>
+                </td>
+                <td>
+                    <button id="button2">Принять</button>
+                </td>
+                <td>
+                    <button id="button3">Принять</button>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+
+    <canvas id="canvas" class="canvas">
+    </canvas>
+</div>
+<script src="js/card_client.js"></script>
+</body>
