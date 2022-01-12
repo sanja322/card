@@ -46,6 +46,7 @@ http.listen(app.get('port'), function(){
 
 io.on('connection', function(socket){
     //connect new user
+
     io.to(socket.id).emit('giveStartGameState',players_name, playersSocketId);
 
     socket.on('givePlayerName', function (playerName,index) {
