@@ -1,3 +1,4 @@
+//
 module.exports.createDeck = createDeck;
 module.exports.possible_moves = getPossibleMoves;
 module.exports.max_card = getIndexMaxCard;
