@@ -36,7 +36,7 @@ app.use('/images',express.static('images'));
 app.use('/js',express.static('js'));
 
 // Listen on port 5000
-app.set('port', (process.env.PORT || 5000));
+app.set('port', (process.env.PORT || 80));
 
 http.listen(app.get('port'), function(){
     console.log('listening on port',app.get('port'));
