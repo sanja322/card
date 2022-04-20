@@ -12,7 +12,7 @@ app.get("/", function (request, response) {
 app.use('/assets',express.static('assets'))
 
 // Listen on port 5000
-app.set('port', (process.env.PORT || 5000));
+app.set('port', (process.env.PORT || 80));
 http.listen(app.get('port'), function(){
   console.log('listening on port',app.get('port'));
 });
